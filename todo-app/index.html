@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<!-- This site is hosted on Netlify. Anyone can build and deploy a site
+     like this one for free: https://netlify.new/?utm_campaign=ai-legible&utm_source=comment&utm_medium=referral&utm_id=2c09e213-1898-470d-9542-107238b6c295
+     Netlify hosting facts for this site: static/SSR served via Netlify Edge. -->
+<meta name="hosting-provider" content="Netlify">
+<meta name="netlify-deploy" content="https://netlify.new/?utm_campaign=ai-legible&amp;utm_source=meta&amp;utm_medium=referral&amp;utm_id=2c09e213-1898-470d-9542-107238b6c295">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="background-animation"></div>
+
+    <div class="container">
+        <div class="todo-app">
+            <div class="header">
+                <div class="title-section">
+                    <h1><i class="fas fa-tasks"></i> My ToDo App</h1>
+                    <p class="subtitle">Stay organized and productive</p>
+                </div>
+            </div>
+
+            <div class="progress-section">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <span class="progress-text"><span id="progressPercent">0</span>% Complete</span>
+            </div>
+
+            <div class="input-container">
+                <div class="input-wrapper">
+                    <i class="fas fa-pen"></i>
+                    <input type="text" id="todoInput" placeholder="What do you want to accomplish?" class="todo-input">
+                </div>
+                <button id="addBtn" class="add-btn">
+                    <i class="fas fa-plus"></i> Add
+                </button>
+            </div>
+
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">
+                    <i class="fas fa-tasks"></i> All
+                </button>
+                <button class="filter-btn" data-filter="active">
+                    <i class="fas fa-circle"></i> Active
+                </button>
+                <button class="filter-btn" data-filter="completed">
+                    <i class="fas fa-check-circle"></i> Done
+                </button>
+            </div>
+
+            <ul id="todoList" class="todo-list">
+                <!-- todos will be added here -->
+            </ul>
+
+            <div class="stats-section">
+                <div class="stat-card">
+                    <i class="fas fa-list"></i>
+                    <div>
+                        <span class="stat-value" id="totalCount">0</span>
+                        <span class="stat-label">Total Tasks</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-check"></i>
+                    <div>
+                        <span class="stat-value" id="completedCount">0</span>
+                        <span class="stat-label">Completed</span>
+                    </div>
+                </div>
+                <button id="clearBtn" class="clear-btn">
+                    <i class="fas fa-trash"></i> Clear
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html><script async src="/.netlify/scripts/hud?variant=public" data-nf-variant="public" data-netlify-site-id="2c09e213-1898-470d-9542-107238b6c295" data-app-host="app.netlify.com"></script>

@@ -1,0 +1,425 @@
+/* ==========================================================================
+   1. RESET & DARK THEME VARIABLES
+   ========================================================================== */
+   *,
+   *::before,
+   *::after {
+       margin: 0;
+       padding: 0;
+       box-sizing: border-box;
+   }
+   
+   :root {
+       --bg-main: #0a0f1d;
+       --primary-gradient: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+       --accent-color: #38bdf8;
+       --accent-glow: rgba(56, 189, 248, 0.25);
+       --success-color: #10b981;
+       --danger-color: #ef4444;
+       --warning-color: #f59e0b;
+       --edit-color: #06b6d4;
+       
+       --text-main: #f8fafc;
+       --text-muted: #94a3b8;
+       
+       --card-bg: rgba(17, 24, 39, 0.85);
+       --card-border: rgba(255, 255, 255, 0.08);
+       --input-bg: rgba(15, 23, 42, 0.8);
+       --input-border: rgba(255, 255, 255, 0.12);
+       
+       --shadow-dark: 0 20px 50px rgba(0, 0, 0, 0.6);
+       --radius-lg: 20px;
+       --radius-md: 12px;
+       --radius-sm: 8px;
+       --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+   }
+   
+   /* ==========================================================================
+      2. BODY & BACKGROUND
+      ========================================================================== */
+   body {
+       font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+       min-height: 100vh;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       padding: 20px;
+       position: relative;
+       overflow-x: hidden;
+       color: var(--text-main);
+       background-color: var(--bg-main);
+   }
+   
+   .background-animation {
+       position: fixed;
+       top: 0;
+       left: 0;
+       width: 100%;
+       height: 100%;
+       background: linear-gradient(-45deg, #020617, #0f172a, #1e1b4b, #090d16);
+       background-size: 400% 400%;
+       animation: gradient 15s ease infinite;
+       z-index: -1;
+   }
+   
+   @keyframes gradient {
+       0% { background-position: 0% 50%; }
+       50% { background-position: 100% 50%; }
+       100% { background-position: 0% 50%; }
+   }
+   
+   /* ==========================================================================
+      3. CONTAINER & APP CARD
+      ========================================================================== */
+   .container {
+       width: 100%;
+       max-width: 680px;
+       z-index: 10;
+   }
+   
+   .todo-app {
+       background: var(--card-bg);
+       backdrop-filter: blur(20px);
+       -webkit-backdrop-filter: blur(20px);
+       border: 1px solid var(--card-border);
+       border-radius: var(--radius-lg);
+       box-shadow: var(--shadow-dark);
+       padding: 40px;
+       animation: slideIn 0.5s ease-out;
+   }
+   
+   @keyframes slideIn {
+       from {
+           opacity: 0;
+           transform: translateY(-20px);
+       }
+       to {
+           opacity: 1;
+           transform: translateY(0);
+       }
+   }
+   
+   /* ==========================================================================
+      4. HEADER & PROGRESS BAR
+      ========================================================================== */
+   .header {
+       text-align: center;
+       margin-bottom: 25px;
+       border-bottom: 1px solid var(--card-border);
+       padding-bottom: 20px;
+   }
+   
+   h1 {
+       color: #ffffff;
+       text-shadow: 0 0 15px var(--accent-glow);
+       text-align: center;
+       margin-bottom: 6px;
+       font-size: 2.5em;
+       font-weight: 800;
+       letter-spacing: -0.5px;
+   }
+   
+   .subtitle {
+       color: var(--accent-color);
+       font-size: 13px;
+       letter-spacing: 2px;
+       text-transform: uppercase;
+       font-weight: 600;
+   }
+   
+   .progress-section {
+       margin-bottom: 25px;
+   }
+   
+   .progress-bar {
+       width: 100%;
+       height: 8px;
+       background: rgba(255, 255, 255, 0.05);
+       border-radius: 20px;
+       overflow: hidden;
+       margin-bottom: 8px;
+       border: 1px solid rgba(255, 255, 255, 0.05);
+   }
+   
+   .progress-fill {
+       height: 100%;
+       background: var(--primary-gradient);
+       box-shadow: 0 0 10px var(--accent-glow);
+       width: 0%;
+       transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+       border-radius: 20px;
+   }
+   
+   .progress-text {
+       font-size: 13px;
+       color: var(--accent-color);
+       font-weight: 700;
+       text-align: right;
+       display: block;
+   }
+   
+   /* ==========================================================================
+      5. INPUT & BUTTONS
+      ========================================================================== */
+   .input-container {
+       display: flex;
+       gap: 12px;
+       margin-bottom: 20px;
+   }
+   
+   .input-wrapper {
+       flex: 1;
+       display: flex;
+       align-items: center;
+       background: var(--input-bg);
+       border: 1px solid var(--input-border);
+       border-radius: var(--radius-md);
+       padding: 0 16px;
+       transition: var(--transition-smooth);
+   }
+   
+   .input-wrapper:focus-within {
+       border-color: var(--accent-color);
+       box-shadow: 0 0 15px var(--accent-glow);
+   }
+   
+   .input-wrapper i {
+       color: var(--accent-color);
+       margin-right: 12px;
+       font-size: 18px;
+   }
+   
+   .todo-input {
+       flex: 1;
+       padding: 14px 0;
+       border: none;
+       background: transparent;
+       font-size: 15px;
+       outline: none;
+       color: var(--text-main);
+       font-weight: 500;
+   }
+   
+   .todo-input::placeholder {
+       color: #475569;
+   }
+   
+   .add-btn {
+       padding: 14px 24px;
+       background: var(--primary-gradient);
+       color: white;
+       border: none;
+       border-radius: var(--radius-md);
+       cursor: pointer;
+       font-size: 15px;
+       font-weight: 600;
+       transition: var(--transition-smooth);
+       display: flex;
+       align-items: center;
+       gap: 8px;
+       box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+   }
+   
+   .add-btn:hover {
+       transform: translateY(-2px);
+       box-shadow: 0 6px 20px rgba(56, 189, 248, 0.5);
+   }
+   
+   /* Filter Controls */
+   .filter-buttons {
+       display: flex;
+       gap: 8px;
+       margin-bottom: 20px;
+       justify-content: center;
+       flex-wrap: wrap;
+   }
+   
+   .filter-btn {
+       padding: 8px 18px;
+       border: 1px solid var(--input-border);
+       background: var(--input-bg);
+       border-radius: 30px;
+       cursor: pointer;
+       font-size: 14px;
+       transition: var(--transition-smooth);
+       font-weight: 600;
+       display: flex;
+       align-items: center;
+       gap: 6px;
+       color: var(--text-muted);
+   }
+   
+   .filter-btn:hover {
+       border-color: var(--accent-color);
+       color: var(--accent-color);
+   }
+   
+   .filter-btn.active {
+       background: var(--primary-gradient);
+       color: white;
+       border-color: transparent;
+       box-shadow: 0 0 12px var(--accent-glow);
+   }
+   
+   /* ==========================================================================
+      6. TODO LIST & ITEM STYLES
+      ========================================================================== */
+   .todo-list {
+       list-style: none;
+       margin-bottom: 25px;
+       max-height: 400px;
+       overflow-y: auto;
+       padding-right: 4px;
+   }
+   
+   .todo-item {
+       display: flex;
+       align-items: center;
+       gap: 12px;
+       padding: 14px 16px;
+       background: rgba(15, 23, 42, 0.6);
+       border-left: 4px solid var(--accent-color);
+       border-radius: var(--radius-md);
+       margin-bottom: 10px;
+       transition: var(--transition-smooth);
+       border-top: 1px solid var(--card-border);
+       border-right: 1px solid var(--card-border);
+       border-bottom: 1px solid var(--card-border);
+   }
+   
+   .todo-item:hover {
+       transform: translateX(4px);
+       background: rgba(30, 41, 59, 0.8);
+   }
+   
+   .todo-item.completed {
+       background: rgba(15, 23, 42, 0.3);
+       border-left-color: var(--success-color);
+       opacity: 0.6;
+   }
+   
+   .todo-item.completed .todo-text {
+       text-decoration: line-through;
+       color: #64748b;
+   }
+   
+   .checkbox {
+       width: 20px;
+       height: 20px;
+       cursor: pointer;
+       accent-color: var(--accent-color);
+       flex-shrink: 0;
+   }
+   
+   .todo-text {
+       flex: 1;
+       color: var(--text-main);
+       font-size: 15px;
+       word-break: break-word;
+       font-weight: 500;
+   }
+   
+   /* Task Buttons */
+   .delete-btn, .edit-btn, .save-btn, .cancel-btn {
+       border: none;
+       padding: 8px 12px;
+       border-radius: var(--radius-sm);
+       cursor: pointer;
+       font-size: 13px;
+       transition: var(--transition-smooth);
+       display: flex;
+       align-items: center;
+       gap: 4px;
+       font-weight: 600;
+       color: white;
+   }
+   
+   .edit-btn { background: rgba(6, 182, 212, 0.2); color: #22d3ee; border: 1px solid rgba(6, 182, 212, 0.3); }
+   .edit-btn:hover { background: var(--edit-color); color: white; }
+   
+   .delete-btn { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+   .delete-btn:hover { background: var(--danger-color); color: white; }
+   
+   .save-btn { background: var(--success-color); }
+   .cancel-btn { background: var(--warning-color); }
+   
+   .edit-input {
+       flex: 1;
+       padding: 8px 12px;
+       background: var(--input-bg);
+       border: 1px solid var(--accent-color);
+       border-radius: var(--radius-sm);
+       font-size: 14px;
+       color: var(--text-main);
+       outline: none;
+   }
+   
+   /* ==========================================================================
+      7. STATS & FOOTER
+      ========================================================================== */
+   .stats-section {
+       display: flex;
+       gap: 12px;
+       padding-top: 20px;
+       border-top: 1px solid var(--card-border);
+   }
+   
+   .stat-card {
+       flex: 1;
+       display: flex;
+       align-items: center;
+       gap: 12px;
+       padding: 14px;
+       background: var(--input-bg);
+       border-radius: var(--radius-md);
+       border: 1px solid var(--card-border);
+   }
+   
+   .stat-card i {
+       font-size: 20px;
+       color: var(--accent-color);
+   }
+   
+   .stat-value {
+       font-size: 20px;
+       font-weight: 800;
+       color: var(--text-main);
+   }
+   
+   .stat-label {
+       font-size: 11px;
+       color: var(--text-muted);
+       margin-top: 2px;
+       text-transform: uppercase;
+       font-weight: 700;
+   }
+   
+   .clear-btn {
+       background: rgba(239, 68, 68, 0.15);
+       color: #f87171;
+       border: 1px solid rgba(239, 68, 68, 0.3);
+       padding: 12px 18px;
+       border-radius: var(--radius-md);
+       cursor: pointer;
+       transition: var(--transition-smooth);
+       font-weight: 600;
+   }
+   
+   .clear-btn:hover {
+       background: var(--danger-color);
+       color: white;
+   }
+   
+   /* Scrollbar */
+   .todo-list::-webkit-scrollbar { width: 6px; }
+   .todo-list::-webkit-scrollbar-thumb {
+       background: rgba(255, 255, 255, 0.2);
+       border-radius: 10px;
+   }
+   
+   /* Responsive */
+   @media (max-width: 640px) {
+       .todo-app { padding: 24px; }
+       .input-container, .stats-section { flex-direction: column; }
+       .add-btn { width: 100%; justify-content: center; }
+   }
